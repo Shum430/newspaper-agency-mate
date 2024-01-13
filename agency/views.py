@@ -20,6 +20,7 @@ class RedactorListView(generic.ListView):
     model = Redactor
     template_name = "agency/redactor_list.html"
     context_object_name = "redactor_list"
+    paginate_by = 3
 
 
 class RedactorDetailView(generic.DetailView):
@@ -30,6 +31,7 @@ class NewspaperListView(generic.ListView):
     model = Newspaper
     template_name = "agency/newspaper_list.html"
     context_object_name = "newspaper_list"
+    paginate_by = 4
 
 
 class NewspaperDetailView(generic.DetailView):
@@ -40,6 +42,7 @@ class TopicListView(generic.ListView):
     model = Topic
     template_name = "agency/topic_list.html"
     context_object_name = "topic_list"
+    paginate_by = 5
 
 
 class TopicDetailView(generic.DetailView):
