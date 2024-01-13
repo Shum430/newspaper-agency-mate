@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>All topics</h1>
+  {% if topic_list %}
+    <ul>
+      {% for topic in topic_list %}
+        <a href="{% url "agency:topic-detail" topic.id %}">
+          <li>{{ topic.name }}</li>
+        </a>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

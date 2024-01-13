@@ -34,3 +34,14 @@ class NewspaperListView(generic.ListView):
 
 class NewspaperDetailView(generic.DetailView):
     model = Newspaper
+
+
+class TopicListView(generic.ListView):
+    model = Topic
+    template_name = "agency/topic_list.html"
+    context_object_name = "topic_list"
+
+
+class TopicDetailView(generic.DetailView):
+    model = Topic
+
