@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>All newspapers</h1>
+  {% if newspaper_list %}
+    <ul>
+      {% for newspaper in newspaper_list %}
+        <a href="{% url "agency:newspaper-detail" newspaper.id %}">
+          <li>{{ newspaper.title }}</li>
+        </a>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

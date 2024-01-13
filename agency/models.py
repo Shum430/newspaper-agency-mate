@@ -29,11 +29,14 @@ class Newspaper(models.Model):
     content = models.CharField(max_length=1024)
     published_date = models.DateTimeField()
     topic = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        Topic,
         on_delete=models.CASCADE,
         related_name="topic_newspapers"
     )
-    publishers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="publishers_newspapers")
+    redactors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="redactors_newspapers")
 
     class Meta:
         ordering = ("published_date",)
+
+    def __str__(self):
+        return self.title

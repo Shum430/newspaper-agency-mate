@@ -24,3 +24,13 @@ class RedactorListView(generic.ListView):
 
 class RedactorDetailView(generic.DetailView):
     model = Redactor
+
+
+class NewspaperListView(generic.ListView):
+    model = Newspaper
+    template_name = "agency/newspaper_list.html"
+    context_object_name = "newspaper_list"
+
+
+class NewspaperDetailView(generic.DetailView):
+    model = Newspaper
