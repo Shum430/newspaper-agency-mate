@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views import generic
+
 from agency.models import Redactor, Topic, Newspaper
 
 
@@ -12,3 +14,13 @@ def index(request):
         "topics": topics
     }
     return render(request, "agency/index.html", context=context)
+
+
+class RedactorListView(generic.ListView):
+    model = Redactor
+    template_name = "agency/redactor_list.html"
+    context_object_name = "redactor_list"
+
+
+class RedactorDetailView(generic.DetailView):
+    model = Redactor

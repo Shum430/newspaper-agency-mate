@@ -21,5 +21,5 @@ from agency.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("agency", include("agency.urls", namespace="agency"))
+    path("agency/", include("agency.urls", namespace="agency"))
 ]
