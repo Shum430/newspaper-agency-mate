@@ -31,9 +31,9 @@ class Newspaper(models.Model):
     topic = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="newspapers"
+        related_name="topic_newspapers"
     )
-    publishers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="newspapers")
+    publishers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="publishers_newspapers")
 
     class Meta:
         ordering = ("published_date",)
