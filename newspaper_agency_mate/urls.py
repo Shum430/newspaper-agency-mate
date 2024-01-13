@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from agency.views import index
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("agency/", include("agency.urls", namespace="agency"))
+    path("agency/", include("agency.urls", namespace="agency")),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
