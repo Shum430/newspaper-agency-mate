@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>All redactors</h1>
+  <h1>All redactors <a style="float: right" href="{% url "agency:redactor-create" %}">+</a></h1>
   {% if redactor_list %}
     <ul>
       {% for redactor in redactor_list %}

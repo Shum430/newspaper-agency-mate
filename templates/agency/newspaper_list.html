@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>All newspapers</h1>
+  <h1>All newspapers <a style="float: right" href="{% url "agency:newspaper-create" %}">add</a></h1>
   {% if newspaper_list %}
     <ul>
       {% for newspaper in newspaper_list %}
