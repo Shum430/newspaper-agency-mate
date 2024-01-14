@@ -14,12 +14,12 @@ class TopicAdmin(admin.ModelAdmin):
 
 @admin.register(Redactor)
 class RedactorAdmin(UserAdmin):
-    list_display = UserAdmin.list_display + ("years_of_experiments",)
-    fieldsets = UserAdmin.fieldsets + (("Important data", {"fields": ("years_of_experiments",)}),)
+    list_display = UserAdmin.list_display + ("years_of_experience",)
+    fieldsets = UserAdmin.fieldsets + (("Important data", {"fields": ("years_of_experience",)}),)
     add_fieldsets = UserAdmin.add_fieldsets + ((
                                                    "Important data", {
                                                        "fields": (
-                                                           "years_of_experiments",
+                                                           "years_of_experience",
                                                            "first_name",
                                                            "last_name",
                                                        )
