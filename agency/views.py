@@ -36,6 +36,18 @@ class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "agency/redactor_form.html"
 
 
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    fields = ("username", "first_name", "last_name", "years_of_experiments",)
+    success_url = reverse_lazy("agency:redactor-list")
+    template_name = "agency/redactor_form.html"
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    template_name = "agency/redactor_confirm_delete.html"
+
+
 class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     template_name = "agency/newspaper_list.html"

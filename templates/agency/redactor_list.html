@@ -3,12 +3,22 @@
 {% block content %}
   <h1>All redactors <a style="float: right" href="{% url "agency:redactor-create" %}">+</a></h1>
   {% if redactor_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
       {% for redactor in redactor_list %}
-        <a href="{% url "agency:redactor-detail" redactor.id %}">
-          <li>{{ redactor.username }}</li>
-        </a>
+      	<tr>
+          <td>{{ redactor.id }}</td>
+          <td>{{ redactor.username }}</td>
+          <td><a href="{% url "agency:redactor-update" redactor.id %}">Update</a></td>
+          <td><a href="{% url "agency:redactor-delete" redactor.id %}">Delete</a></td>
+        </tr>
       {% endfor %}
-    </ul>
+      
+    </table>
   {% endif %}
 {% endblock %}
