@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from agency.forms import RedactorCreationForm, NewspaperForm
+from agency.forms import RedactorCreationForm, NewspaperForm, RedactorSearchForm
 from agency.models import Redactor, Topic, Newspaper
 
 
@@ -26,6 +26,17 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
     template_name = "agency/redactor_list.html"
     context_object_name = "redactor_list"
     paginate_by = 3
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(RedactorListView, self).get_context_data(**kwargs)
+        context["search_form"] = RedactorSearchForm()
+        return context
+
+    def get_queryset(self):
+        username = self.request.GET.get("username")
+        if username:
+            return Redactor.objects.filter(username__icontains=username)
+        return Redactor.objects.all()
 
 
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
