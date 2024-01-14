@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from django.conf import settings
@@ -15,7 +16,13 @@ class Topic(models.Model):
 
 
 class Redactor(AbstractUser):
-    years_of_experiments = models.IntegerField(default=0)
+    min_years_of_experience = 2
+    years_of_experience = models.IntegerField(
+        default=0,
+        validators=[MinValueValidator(min_years_of_experience)],
+        blank=False,
+        null=False
+    )
 
     class Meta:
         ordering = ("username",)
