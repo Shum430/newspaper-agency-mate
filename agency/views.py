@@ -3,6 +3,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from agency.forms import RedactorCreationForm, NewspaperForm
 from agency.models import Redactor, Topic, Newspaper
 
 
@@ -32,20 +34,19 @@ class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
-    fields = ("username", "first_name", "last_name", "password", "years_of_experiments",)
-    success_url = reverse_lazy("agency:redactor-list")
-    template_name = "agency/redactor_form.html"
+    form_class = RedactorCreationForm
 
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
-    fields = ("username", "first_name", "last_name", "years_of_experiments",)
+    fields = ("username", "first_name", "last_name", "years_of_experience",)
     success_url = reverse_lazy("agency:redactor-list")
     template_name = "agency/redactor_form.html"
 
 
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Redactor
+    success_url = reverse_lazy("agency:redactor-list")
     template_name = "agency/redactor_confirm_delete.html"
 
 
@@ -62,16 +63,12 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
 
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
-    fields = "__all__"
-    success_url = reverse_lazy("agency:newspaper-list")
-    template_name = "agency/newspaper_form.html"
+    form_class = NewspaperForm
 
 
 class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
-    fields = "__all__"
-    success_url = reverse_lazy("agency:newspaper-list")
-    template_name = "agency/newspaper_form.html"
+    form_class = NewspaperForm
 
 
 class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
