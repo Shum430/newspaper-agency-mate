@@ -3,12 +3,22 @@
 {% block content %}
   <h1>All topics <a style="float: right" href="{% url "agency:topic-create" %}">add</a></h1>
   {% if topic_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
       {% for topic in topic_list %}
-        <a href="{% url "agency:topic-detail" topic.id %}">
-          <li>{{ topic.name }}</li>
-        </a>
+      	<tr>
+          <td>{{ topic.id }}</td>
+          <td>{{ topic.name }}</td>
+          <td><a href="{% url "agency:topic-update" topic.id %}">Update</a></td>
+          <td><a href="{% url "agency:topic-delete" topic.id %}">Delete</a></td>
+        </tr>
       {% endfor %}
-    </ul>
+
+    </table>
   {% endif %}
 {% endblock %}

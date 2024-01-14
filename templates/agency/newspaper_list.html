@@ -3,12 +3,22 @@
 {% block content %}
   <h1>All newspapers <a style="float: right" href="{% url "agency:newspaper-create" %}">add</a></h1>
   {% if newspaper_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
       {% for newspaper in newspaper_list %}
-        <a href="{% url "agency:newspaper-detail" newspaper.id %}">
-          <li>{{ newspaper.title }}</li>
-        </a>
+      	<tr>
+          <td>{{ newspaper.id }}</td>
+          <td>{{ newspaper.title }}</td>
+          <td><a href="{% url "agency:newspaper-update" newspaper.id %}">Update</a></td>
+          <td><a href="{% url "agency:newspaper-delete" newspaper.id %}">Delete</a></td>
+        </tr>
       {% endfor %}
-    </ul>
+
+    </table>
   {% endif %}
 {% endblock %}

@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from agency.models import Redactor, Topic, Newspaper
 
+
 @login_required
 def index(request):
     redactors = Redactor.objects.all()
@@ -66,6 +67,18 @@ class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "agency/newspaper_form.html"
 
 
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Newspaper
+    fields = "__all__"
+    success_url = reverse_lazy("agency:newspaper-list")
+    template_name = "agency/newspaper_form.html"
+
+
+class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Newspaper
+    template_name = "agency/newspaper_confirm_delete.html"
+
+
 class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
     template_name = "agency/topic_list.html"
@@ -82,4 +95,17 @@ class TopicCreateView(LoginRequiredMixin, generic.CreateView):
     fields = "__all__"
     success_url = reverse_lazy("agency:topic-list")
     template_name = "agency/topic_form.html"
+
+
+class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Topic
+    fields = "__all__"
+    success_url = reverse_lazy("agency:topic-list")
+    template_name = "agency/topic_form.html"
+
+
+class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Topic
+    template_name = "agency/topic_confirm_delete.html"
+
 
