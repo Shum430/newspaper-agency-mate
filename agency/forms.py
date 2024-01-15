@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from agency.models import Redactor, Newspaper
+from agency.models import Redactor, Newspaper, Topic
 
 
 class RedactorCreationForm(UserCreationForm):
@@ -15,6 +15,11 @@ class NewspaperForm(forms.ModelForm):
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False
+    )
+    topic = forms.ModelChoiceField(
+        queryset=Topic.objects.all(),
+        widget=forms.Select,
+        required=True
     )
 
     class Meta:

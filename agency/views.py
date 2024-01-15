@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -58,7 +59,6 @@ class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "agency/redactor_form.html"
 
 
-
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Redactor
     success_url = reverse_lazy("agency:redactor-list")
@@ -79,6 +79,8 @@ class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
 class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
     form_class = NewspaperForm
+    template_name = "agency/newspaper_form.html"
+    success_url = reverse_lazy("agency:newspaper-list")
 
 
 class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -119,5 +121,6 @@ class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
 class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Topic
     template_name = "agency/topic_confirm_delete.html"
+    success_url = reverse_lazy("agency:topic-list")
 
 
