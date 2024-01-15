@@ -47,12 +47,16 @@ class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
     form_class = RedactorCreationForm
 
+    def get_success_url(self):
+        return reverse_lazy("agency:redactor-list")
+
 
 class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Redactor
     fields = ("username", "first_name", "last_name", "years_of_experience",)
     success_url = reverse_lazy("agency:redactor-list")
     template_name = "agency/redactor_form.html"
+
 
 
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
