@@ -15,7 +15,7 @@ from agency.views import (
 )
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("agency", index, name="index"),
     path("redactors/", RedactorListView.as_view(), name="redactor-list"),
     path("redactors/<int:pk>/", RedactorDetailView.as_view(), name="redactor-detail"),
     path("redactors/create/", RedactorCreateView.as_view(), name="redactor-create"),
