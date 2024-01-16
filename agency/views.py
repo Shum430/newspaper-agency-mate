@@ -26,7 +26,7 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
     template_name = "agency/redactor_list.html"
     context_object_name = "redactor_list"
-    paginate_by = 1
+    paginate_by = 3
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(RedactorListView, self).get_context_data(**kwargs)
@@ -86,11 +86,13 @@ class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
 class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
     form_class = NewspaperForm
+    success_url = reverse_lazy("agency:newspaper-list")
 
 
 class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     template_name = "agency/newspaper_confirm_delete.html"
+    success_url = reverse_lazy("agency:newspaper-list")
 
 
 class TopicListView(LoginRequiredMixin, generic.ListView):

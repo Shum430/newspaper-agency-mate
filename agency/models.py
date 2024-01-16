@@ -38,9 +38,10 @@ class Newspaper(models.Model):
     published_date = models.DateTimeField()
     topic = models.ForeignKey(
         Topic,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         related_name="topic_newspapers"
     )
+
     redactors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="redactors_newspapers")
 
     class Meta:
