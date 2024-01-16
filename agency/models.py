@@ -38,7 +38,7 @@ class Newspaper(models.Model):
     published_date = models.DateTimeField()
     topic = models.ForeignKey(
         Topic,
-        on_delete=models.CASCADE,
+        on_delete=models.DO_NOTHING,
         related_name="topic_newspapers"
     )
 
