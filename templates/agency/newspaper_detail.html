@@ -8,14 +8,14 @@
       <div class="col-md-6">
         <p><strong>Content:</strong> {{ newspaper.content }}</p>
         <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
-        <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+        <p><strong>Topic:</strong> <a href="{% url "agency:topic-detail" newspaper.topic.id %}">{{ newspaper.topic.name }}</a></p>
       </div>
       <div class="col-md-6">
         <h3>Redactors</h3>
         {% if newspaper.redactors.all %}
           <ul>
             {% for redactor in newspaper.redactors.all %}
-              <li>{{ redactor.get_full_name }} ({{ redactor.username }})</li>
+              <li><a href="{% url "agency:redactor-detail" redactor.id %}">{{ redactor.get_full_name }} ({{ redactor.username }})</a></li>
             {% endfor %}
           </ul>
         {% else %}

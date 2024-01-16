@@ -39,8 +39,8 @@
             {% for newspaper in newspapers %}
                 <div class="col-md-6">
                     <div class="list-group-item">
-                        <h2>{{ newspaper.title }}</h2>
-                        <p class="lead">{{ newspaper.content|slice:":100" }}...</p>
+                        <h2><a href="{% url "agency:newspaper-detail" newspaper.id %}">{{ newspaper.title }}</a></h2>
+                        <p class="lead">{{ newspaper.content|slice:":20" }}...</p>
                         <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
                         {% if newspaper.redactors.exists %}
                             <p><strong>Author:</strong>

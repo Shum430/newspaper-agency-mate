@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from agency.forms import RedactorCreationForm, NewspaperForm, RedactorSearchForm
+from agency.forms import RedactorCreationForm, NewspaperForm, RedactorSearchForm, NewspaperSearchForm
 from agency.models import Redactor, Topic, Newspaper
 
 
@@ -89,6 +89,18 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "newspaper_list"
     paginate_by = 4
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(NewspaperListView, self).get_context_data(**kwargs)
+        context["search_form"] = NewspaperSearchForm()
+        return context
+
+    def get_queryset(self):
+        start_date = self.request.GET.get("start_date")
+        end_date = self.request.GET.get("end_date")
+        if start_date and end_date:
+            return Newspaper.objects.filter(published_date__range=(start_date, end_date))
+        return Newspaper.objects.all()
+
 
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     model = Newspaper
@@ -142,5 +154,8 @@ class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Topic
     template_name = "agency/topic_confirm_delete.html"
     success_url = reverse_lazy("agency:topic-list")
+
+
+
 
 

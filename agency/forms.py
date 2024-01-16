@@ -39,3 +39,16 @@ class RedactorSearchForm(forms.Form):
         )
     )
 
+
+class NewspaperSearchForm(forms.Form):
+    start_date = forms.DateField(
+        label='Start Date',
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False
+    )
+
+    end_date = forms.DateField(
+        label='End Date',
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False
+    )

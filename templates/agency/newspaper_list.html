@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
 
 {% block content %}
   <div class="container mt-5">
     <h1 class="mb-4">All Newspapers <a href="{% url 'agency:newspaper-create' %}" class="btn btn-primary float-right">Add</a></h1>
+
+    <form method="get" action="" class="mb-4">
+      {{ search_form|crispy }}
+      <button class="btn btn-secondary" type="submit">🔎 Search</button>
+    </form>
 
     {% if newspaper_list %}
       <table class="table table-bordered table-hover">
