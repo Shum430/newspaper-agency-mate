@@ -1,24 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>All topics <a style="float: right" href="{% url "agency:topic-create" %}">add</a></h1>
-  {% if topic_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-      {% for topic in topic_list %}
-      	<tr>
-          <td>{{ topic.id }}</td>
-          <td>{{ topic.name }}</td>
-          <td><a href="{% url "agency:topic-update" topic.id %}">Update</a></td>
-          <td><a href="{% url "agency:topic-delete" topic.id %}">Delete</a></td>
-        </tr>
-      {% endfor %}
+  <div class="container mt-5">
+    <h1 class="mb-4">All Topics <a href="{% url 'agency:topic-create' %}" class="btn btn-primary float-right">Add</a></h1>
 
-    </table>
-  {% endif %}
+    {% if topic_list %}
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for topic in topic_list %}
+            <tr>
+              <td>{{ topic.id }}</td>
+              <td><a href="{% url 'agency:topic-detail' topic.id %}" class="text-primary">{{ topic.name }}</a></td>
+              <td><a href="{% url 'agency:topic-update' topic.id %}" class="btn btn-warning btn-sm">Update</a></td>
+              <td><a href="{% url 'agency:topic-delete' topic.id %}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ topic.id }}">
+                🗑️ Delete
+              </a></td>
+            </tr>
+
+            <!-- Delete Modal for each newspaper -->
+            <div class="modal fade" id="deleteModal{{ topic.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ topic.id }}" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel{{ topic.id }}">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete '{{ topic.name }}'?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="{% url 'agency:topic-delete' topic.id %}" class="btn btn-danger">Delete</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="alert alert-info">No topics available.</p>
+    {% endif %}
+  </div>
 {% endblock %}

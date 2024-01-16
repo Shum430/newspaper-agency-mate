@@ -1,5 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-  {{ newspaper.title }} {{ newspaper.topic }}
+  <div class="container mt-5">
+    <h1>{{ newspaper.title }}</h1>
+
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <p><strong>Content:</strong> {{ newspaper.content }}</p>
+        <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
+        <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+      </div>
+      <div class="col-md-6">
+        <h3>Redactors</h3>
+        {% if newspaper.redactors.all %}
+          <ul>
+            {% for redactor in newspaper.redactors.all %}
+              <li>{{ redactor.get_full_name }} ({{ redactor.username }})</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No redactors assigned to this newspaper.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <a href="{% url 'agency:newspaper-list' %}" class="btn btn-primary">Back to Newspaper List</a>
+    </div>
+  </div>
 {% endblock %}

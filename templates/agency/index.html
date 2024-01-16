@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
@@ -17,56 +18,10 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
 
-        .navbar {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .list-group-item {
-            background-color: #fff;
-            border-color: #dee2e6;
-        }
-
-        .social-icons {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .social-icons li {
-            margin-right: 10px;
-        }
-
-        .social-icons a {
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-            transition: color 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            color: #ffc107; /* Change color on hover */
-        }
-        .text-yellow {
-          color: #ffc107; /* Жовтий колір */
-        }
-
-        .fa-stack:hover .fa-inverse {
-            filter: brightness(1.5); /* Збільшити яскравість при наведенні */
-        }
-        a {
-    color: inherit; /* or any other color you want to use */
-    text-decoration: none; /* remove underline if needed */
-}
-    </style>
 </head>
+{% block content %}
+
 
 <body id="page-top">
 
@@ -74,68 +29,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Agency <sup>©️</sup></div>
-            </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                What we have
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{% url 'agency:redactor-list' %}" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Redactors</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{% url 'agency:topic-list' %}" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Topics</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{% url 'agency:newspaper-list' %}" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="flase" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Newspapers</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <hr class="sidebar-divider">
-
-            <div class="sidebar-card d-none d-lg-flex">
-                <a href="#"><p class="text-center mb-2"><strong>Contact us<sup>✍️</sup></strong></p></a>
-            </div>
-        </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -168,33 +62,8 @@
                 {% endif %}
             {% endfor %}
             </div>
+
         </div>
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-            <!-- Sidebar Toggle (Topbar) -->
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                <i class="fa fa-bars"></i>
-            </button>
-
-            <!-- Topbar Navbar -->
-            <ul class="navbar-nav ml-auto">
-
-                <!-- Authentication Links -->
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <span class="nav-link">User: {{ user.username }}</span>
-                    </li>
-                    <form method="post" action="{% url 'logout' %}" class="nav-item">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-link nav-link">Logout</button>
-                    </form>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
@@ -205,64 +74,7 @@
     </a>
 
     <!-- Footer -->
-    <footer style="background-color: #007bff;">
-        <div class="container">
-            <div class="row d-flex align-items-center">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <ul class="list-inline text-center social-icons">
-                        <li class="list-inline-item">
-                          <a href="mailto:avstralopitek71@gmail.com">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x text-yellow"></i>
-                              <i class="far fa-envelope fa-stack-1x fa-inverse text-white"></i>
-                            </span>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="https://twitter.com/shum430">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x text-yellow"></i>
-                              <i class="fab fa-twitter fa-stack-1x fa-inverse text-white"></i>
-                            </span>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="https://www.facebook.com/profile.php?id=100008973965435">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x text-yellow"></i>
-                              <i class="fab fa-facebook-f fa-stack-1x fa-inverse text-white"></i>
-                            </span>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="https://www.linkedin.com/in/andriy-shumskyy-52426a260/">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x text-yellow"></i>
-                              <i class="fab fa-linkedin fa-stack-1x fa-inverse text-white"></i>
-                            </span>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="https://github.com/Shum430">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x text-yellow"></i>
-                              <i class="fab fa-github fa-stack-1x fa-inverse text-white"></i>
-                            </span>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a href="https://instagram.com/shum430">
-                            <span class="fa-stack fa-lg">
-                              <i class="fas fa-circle fa-stack-2x text-yellow"></i>
-                              <i class="fab fa-instagram fa-stack-1x fa-inverse text-white"></i>
-                            </span>
-                          </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+
     <!-- Logout Modal-->
 
 
@@ -285,5 +97,5 @@
     <script src="{% static "js/demo/chart-pie-demo.js" %}"></script>
 
 </body>
-
+{% endblock %}
 </html>

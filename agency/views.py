@@ -43,6 +43,24 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        redactor = self.object
+        topics_count = {}
+        for newspaper in redactor.redactors_newspapers.all():
+            topic_name = newspaper.topic.name
+            topics_count[topic_name] = topics_count.get(topic_name, 0) + 1
+
+        if topics_count:
+            most_popular_topic = max(topics_count, key=topics_count.get)
+        else:
+            most_popular_topic = "No assigned newspapers"
+
+        context['most_popular_topic'] = most_popular_topic
+
+        return context
+
 
 class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = Redactor
