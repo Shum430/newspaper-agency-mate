@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="mb-4">All Redactors <a href="{% url 'agency:redactor-create' %}" class="btn btn-primary float-right">Add Redactor</a></h1>
+
+    <form method="get" action="" class="form-inline mb-3">
+      {{ search_form|crispy }}
+      <button class="btn btn-secondary" type="submit">🔎 Search</button>
+    </form>
+
+    {% if redactor_list %}
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for redactor in redactor_list %}
+            <tr>
+              <td>{{ redactor.id }}</td>
+              <td><a href="{% url "agency:redactor-detail" redactor.id %}" style="color: rgb(128,128,128)">{{ redactor.username }}</a></td>
+              <td><a href="{% url 'agency:redactor-update' redactor.id %}" class="btn btn-warning btn-sm">Update</a></td>
+              <td>
+                <a href="{% url 'agency:redactor-delete' redactor.id %}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ redactor.id }}">
+                  🗑️ Delete
+                </a>
+              </td>
+            </tr>
+
+            <!-- Delete Modal for each redactor -->
+            <div class="modal fade" id="deleteModal{{ redactor.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ redactor.id }}" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel{{ redactor.id }}">Confirm Deletion</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete '{{ redactor.username }}'?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="{% url 'agency:redactor-delete' redactor.id %}" class="btn btn-danger">Delete</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="alert alert-info">No redactors available.</p>
+    {% endif %}
+  </div>
+{% endblock %}
