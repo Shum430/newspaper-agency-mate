@@ -9,17 +9,14 @@ from agency.forms import RedactorCreationForm, NewspaperForm, RedactorSearchForm
 from agency.models import Redactor, Topic, Newspaper
 
 
-class IndexView(LoginRequiredMixin, ListView):
+class IndexView(ListView):
     template_name = "agency/index.html"
     context_object_name = "context"
-    queryset = Redactor.objects.all()
-    newspapers = Newspaper.objects.all()
-    topics = Topic.objects.all()
+    queryset = Newspaper.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["newspapers"] = self.newspapers
-        context["topics"] = self.topics
+        context["redactors"] = Redactor.objects.all()
         return context
 
 
