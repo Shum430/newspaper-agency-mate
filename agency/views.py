@@ -17,6 +17,7 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["redactors"] = Redactor.objects.all()
+        context["newspaper_list"] = context["object_list"]
         return context
 
 
