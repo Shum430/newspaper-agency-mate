@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-h2@asy3hl--$p-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "newspaper-agency-sbpa.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "snuffleupagus.db.elephantsql.com", "newspaper-agency-sbpa.onrender.com"]
 
 
 # Application definition
