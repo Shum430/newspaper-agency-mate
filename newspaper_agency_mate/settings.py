@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'newspaper_agency_mate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -87,8 +88,6 @@ DATABASES = {
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES["default"].update(db_from_env)
-DATABASE_URL = "postgres://dkkpwvpv:XZ2s2jHt2FeqD9SjsvfJvB3B7N5llhRd@snuffleupagus.db.elephantsql.com/dkkpwvpv"
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
