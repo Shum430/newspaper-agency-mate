@@ -9,7 +9,7 @@ from agency.forms import RedactorCreationForm, NewspaperForm, RedactorSearchForm
 from agency.models import Redactor, Topic, Newspaper
 
 
-class IndexView(ListView):
+class IndexView(LoginRequiredMixin, ListView):
     template_name = "agency/index.html"
     context_object_name = "context"
     queryset = Redactor.objects.all()
