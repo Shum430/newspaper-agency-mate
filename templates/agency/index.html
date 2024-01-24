@@ -36,7 +36,7 @@
         <div class="container mt-4">
         <h1 class="mb-4">Newspaper List</h1>
         <div class="row">
-            {% for newspaper in newspapers %}
+            {% for newspaper in newspaper_list %}
                 <div class="col-md-6">
                     <div class="list-group-item">
                         <h2><a href="{% url "agency:newspaper-detail" newspaper.id %}">{{ newspaper.title }}</a></h2>

@@ -1,25 +1,24 @@
-from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
 
 from agency.forms import RedactorCreationForm, NewspaperForm, RedactorSearchForm, NewspaperSearchForm
 from agency.models import Redactor, Topic, Newspaper
 
 
-@login_required
-def index(request):
-    redactors = Redactor.objects.all()
-    topics = Topic.objects.all()
-    newspapers = Newspaper.objects.all()
-    context = {
-        "redactors": redactors,
-        "newspapers": newspapers,
-        "topics": topics
-    }
-    return render(request, "agency/index.html", context=context)
+class IndexView(ListView):
+    template_name = "agency/index.html"
+    context_object_name = "context"
+    queryset = Newspaper.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["redactors"] = Redactor.objects.all()
+        context["newspaper_list"] = context["object_list"]
+        return context
 
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
